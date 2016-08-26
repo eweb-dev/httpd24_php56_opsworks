@@ -12,6 +12,9 @@ node[:deploy].each do |application, deploy|
     next
   end
 
+  node.normal[:deploy][application][:purge_before_symlink].clear
+  node.normal[:deploy][application][:symlinks].clear
+
   opsworks_deploy_dir do
     user deploy[:user]
     group deploy[:group]
