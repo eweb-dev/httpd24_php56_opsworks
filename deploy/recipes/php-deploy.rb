@@ -12,8 +12,8 @@ node[:deploy].each do |application, deploy|
     next
   end
 
-  node.normal[:deploy][application][:purge_before_symlink].clear
-  node.normal[:deploy][application][:symlinks].clear
+  node.normal[:deploy][application][:purge_before_symlink] = ['log', 'tmp/pids']
+  node.normal[:deploy][application][:symlinks] = {"pids" => "tmp/pids", "log" => "log"}
 
   opsworks_deploy_dir do
     user deploy[:user]
